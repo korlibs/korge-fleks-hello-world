@@ -7,8 +7,8 @@ plugins {
 korge {
 	id = "com.sample.demo"
 
-	// Using Fleks standalone from maven central / local
-	dependencyMulti("io.github.quillraven.fleks:Fleks:1.4-KMP-RC1", registerPlugin = false)
+	// Using Fleks from maven central / local
+	dependencyMulti("io.github.quillraven.fleks:Fleks:2.0", registerPlugin = false)
 
 // To enable all targets at once
 
