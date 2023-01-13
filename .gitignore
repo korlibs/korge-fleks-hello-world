@@ -1,6 +1,9 @@
 /.gradle
 /.idea
 /build
+/deps
+/modules
+/libs/fleks-src
 *.iml
 *.hprof
 *.log
