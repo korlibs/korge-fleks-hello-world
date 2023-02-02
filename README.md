@@ -10,5 +10,6 @@ You can find this template at GitHub: <https://github.com/korlibs/korge-fleks-he
 For more information how to compile and run this example please
 continue to read in the KorGe Hello-World example [README](https://github.com/korlibs/korge-hello-world/blob/main/README.md) file.
 
-For more information how to use Fleks ECS please have a look [here](https://github.com/Quillraven/Fleks/wiki) in the Fleks home
-repo. Check out version 2.x there!
+For more general information how to use Fleks ECS please have a look in the [Fleks Wiki](https://github.com/Quillraven/Fleks/wiki). Make sure to read version 2.x there!
+
+Checkout the Korge-Fleks [README](https://github.com/korlibs/korge-fleks/blob/main/README.md) to learn which Korge-ready ECS systems and component configurations already exist which you can reuse!

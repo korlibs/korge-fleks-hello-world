@@ -8,20 +8,19 @@ korge {
 	id = "com.sample.korgeflekshelloworld"
 
 // To enable all targets at once
-	targetAll()
+	//targetAll()
 
 // To enable targets based on properties/environment variables
 	//targetDefault()
 
 // To selectively enable targets
-	
 	targetJvm()
 	targetJs()
 	targetDesktop()
-	targetIos()
-	targetAndroidIndirect()
-	serializationJson()
-    //targetAndroidDirect()
+	//targetIos()
+	//targetAndroidIndirect()
+	//serializationJson()
+	//targetAndroidDirect()
 }
 
 dependencies {
