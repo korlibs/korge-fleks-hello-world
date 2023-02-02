@@ -3,7 +3,12 @@
 /build
 /deps
 /modules
-/libs/fleks-src
+
+/libs/fleks/.gitignore
+/libs/fleks/build.gradle
+/libs/korge-fleks/.gitignore
+/libs/korge-fleks/build.gradle
+
 *.iml
 *.hprof
 *.log
