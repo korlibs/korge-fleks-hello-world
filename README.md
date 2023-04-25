@@ -9,11 +9,11 @@ the build.gradle.kts file.
 
 # Supported Versions
 
-- Korge: 4.0.0-rc
-- Korge-fleks addon: v0.0.4
-- Korge-parallax addon: 6cbac0f917f208ac1fe58dd3f0618af75f00427d (on branch adaptation-of-parallax-view-to-korge-fleks)
-- Korge-tiled addon: 13e674655b94d422839fd3b689f8ba40e92fa84c
-- Fleks: c24925091ced418bf045ba0672734addaab573d8 (on branch 2.3-korge-serialization)
+- Korge: `4.0.0-rc`
+- Korge-fleks addon: `v0.0.4`
+- Korge-parallax addon: `6cbac0f917f208ac1fe58dd3f0618af75f00427d` (on branch adaptation-of-parallax-view-to-korge-fleks)
+- Korge-tiled addon: `13e674655b94d422839fd3b689f8ba40e92fa84c`
+- Fleks: `c24925091ced418bf045ba0672734addaab573d8` (on branch 2.3-korge-serialization)
 
 # Updating to newer versions of KorGE-Fleks
 
