@@ -5,9 +5,9 @@ import korlibs.korge.view.container
 import korlibs.korge.view.addUpdater
 import com.github.quillraven.fleks.*
 import korlibs.korge.view.SContainer
+import korlibs.time.seconds
 import samples.fleks.assets.Assets
 import samples.fleks.systems.*
-import samples.fleks.components.*
 import samples.fleks.entities.createMeteoriteSpawner
 
 class MainFleksSample : Scene() {
@@ -29,7 +29,7 @@ class MainFleksSample : Scene() {
 
     override suspend fun SContainer.sceneMain() {
         container {
-            scaleAvg = scaleFactor.toFloat()
+            scale = scaleFactor.toDouble()
 
             // Here are the container views which contain the generated entity objects with visible component "Sprite" attached to it
             //
@@ -39,18 +39,12 @@ class MainFleksSample : Scene() {
 
             // This is the world object of the entity component system (ECS)
             // It contains all ECS related system and component configuration
-            val world = world(entityCapacity = 512) {
+            val world = configureWorld(entityCapacity = 512) {
                 // Register external objects which are used by systems and component listeners
                 injectables {
                     add(assets)  // Assets are used by the SpriteSystem / SpriteListener to get the image data for drawing
                     add("layer0", layer0)  // Currently, we use only one layer to draw all objects to - this is also used in SpriteListener to add the image to the layer container
                     // inject("layer1", layer1)  // Add more layers when needed e.g. for explosion objects to be on top, etc.
-                }
-
-                // Register component hooks which trigger actions when specific components are created
-                components {
-                    onAdd(Sprite, Sprite.onComponentAdded)
-                    onRemove(Sprite, Sprite.onComponentRemoved)
                 }
 
                 // Register family hooks which trigger actions when specific entities (combination of components) are created

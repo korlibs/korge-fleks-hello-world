@@ -16,11 +16,10 @@ korge {
 // To selectively enable targets
 	targetJvm()
 	targetJs()
-	targetDesktop()
-	//targetIos()
-	//targetAndroidIndirect()
-	//serializationJson()
-	//targetAndroidDirect()
+//	targetIos()
+	targetAndroid()
+
+	serializationJson()
 }
 
 dependencies {

@@ -13,7 +13,7 @@ Korge version needs to be updated in `gradle/libs.versions.toml`:
 
 ```kotlin
 [plugins]
-korge = { id = "com.soywiz.korge", version = "4.0.0-rc4" }
+korge = { id = "com.soywiz.korge", version = "5.1.0" }
 ```
 
 ## Fleks version
