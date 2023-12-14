@@ -11,7 +11,7 @@ the `build.gradle.kts` file.
 
 Korge version needs to be updated in `gradle/libs.versions.toml`:
 
-```kotlin
+```toml
 [plugins]
 korge = { id = "com.soywiz.korge", version = "5.1.0" }
 ```

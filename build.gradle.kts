@@ -20,6 +20,8 @@ korge {
 	targetAndroid()
 
 	serializationJson()
+
+	this.autoGenerateTypedResources = false
 }
 
 dependencies {
