@@ -11,8 +11,8 @@ import samples.fleks.components.*
 class MoveSystem : IteratingSystem(
     family {
         all(Position)  // Position component absolutely needed for movement of entity objects
-        any(Position, Rigidbody)  // Rigidbody not necessarily needed for movement
-           },
+            .any(Position, Rigidbody)  // Rigidbody not necessarily needed for movement
+    },
     interval = EachFrame
 ) {
     override fun onTickEntity(entity: Entity) {

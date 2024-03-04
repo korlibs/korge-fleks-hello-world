@@ -4,9 +4,11 @@ import korlibs.korge.scene.Scene
 import korlibs.korge.view.container
 import korlibs.korge.view.addUpdater
 import com.github.quillraven.fleks.*
+import korlibs.korge.assetmanager.AssetType
+import korlibs.korge.assetmanager.loadAssets
+import korlibs.korge.fleks.familyHooks.*
 import korlibs.korge.view.SContainer
 import korlibs.time.seconds
-import samples.fleks.assets.Assets
 import samples.fleks.systems.*
 import samples.fleks.entities.createMeteoriteSpawner
 
@@ -14,17 +16,13 @@ class MainFleksSample : Scene() {
     companion object {
         const val scaleFactor = 3
     }
-    private val assets = Assets()
 
     override suspend fun SContainer.sceneInit() {
 
         // Configure and load the asset objects
-        val config = Assets.Config(
-            images = listOf(
-                Pair("meteorite", "sprites.ase")
-            )
-        )
-        assets.load(config)
+        loadAssets(type = AssetType.Common, folderName = "common") {
+            addImage(id = "meteorite", fileName = "sprites.ase")
+        }
     }
 
     override suspend fun SContainer.sceneMain() {
@@ -42,19 +40,23 @@ class MainFleksSample : Scene() {
             val world = configureWorld(entityCapacity = 512) {
                 // Register external objects which are used by systems and component listeners
                 injectables {
-                    add(assets)  // Assets are used by the SpriteSystem / SpriteListener to get the image data for drawing
                     add("layer0", layer0)  // Currently, we use only one layer to draw all objects to - this is also used in SpriteListener to add the image to the layer container
                     // inject("layer1", layer1)  // Add more layers when needed e.g. for explosion objects to be on top, etc.
                 }
 
                 // Register family hooks which trigger actions when specific entities (combination of components) are created
                 families {
-                    // not used here
+                    // Register family hooks from Korge-fleks
+                    onAdd(drawableFamily(), onDrawableFamilyAdded)
+                    onRemove(drawableFamily(), onDrawableFamilyRemoved)
+                    onAdd(specificLayerFamily(), onSpecificLayerFamilyAdded)
+                    onRemove(specificLayerFamily(), onSpecificLayerFamilyRemoved)
                 }
 
                 // Register all needed systems of the entity component system
                 // The order of systems here also define the order in which the systems are called inside Fleks ECS
                 systems {
+                    // TODO: Use systems provided by Korge-fleks
                     add(MoveSystem())
                     add(SpawnerSystem())
                     add(CollisionSystem())
