@@ -13,7 +13,7 @@ Korge version needs to be updated in `gradle/libs.versions.toml`:
 
 ```toml
 [plugins]
-korge = { id = "com.soywiz.korge", version = "5.1.0" }
+korge = { id = "com.soywiz.korge", version = "5.3.2" }
 ```
 
 ## Fleks version
@@ -22,8 +22,15 @@ Fleks ECS version needs to be updated in the kproject file `deps.kproject.yml`:
 
 ```
 dependencies:
-- https://github.com/korlibs/korge-fleks/tree/02fed30e752cc14c71cecafbdee2882c95d99e64/korge-fleks
+- https://github.com/korlibs/korge-fleks/tree/0acbfcb5d89eca161c3537a9160143c9a72d2725/korge-fleks
 ```
+
+It is possible to use a local copy of Korge-fleks e. g. via git submodules.
+Just create a submodule with the following command:
+
+    $ git submodule add https://github.com/korlibs/korge-fleks submodules/korge-fleks
+
+After that comment line 3 and uncomment line 5 in deps.kproject.yml file.
 
 # More information
 
