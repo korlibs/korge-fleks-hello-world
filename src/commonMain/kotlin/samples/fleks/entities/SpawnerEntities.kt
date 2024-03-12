@@ -2,26 +2,52 @@ package samples.fleks.entities
 
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.World
+import korlibs.korge.fleks.components.PositionShapeComponent
+import korlibs.korge.fleks.components.SpawnerComponent
+import korlibs.korge.fleks.entity.config.MovedSpawnerObject.configureSpawnerObject
+import korlibs.korge.fleks.utils.Identifier
 import samples.fleks.components.*
 import samples.fleks.utils.random
+
+
+// Names for objects
+val meteoriteObject = Identifier(name = "meteoriteObject")
+val meteoriteDust = Identifier(name = "meteoriteDust")
 
 /**
  * This function creates a spawner entity which sits on top of the screen and
  * spawns the meteorite objects. The config for it contains:
- * - a "Position" component which set the position of the spawner area 10 pixels
+ * - a [PositionShapeComponent] which set the position of the spawner area 10 pixels
  *   above the visible area.
- * - a "Spawner" component which tells the system that the spawned
+ * - a [SpawnerComponent] which tells the system that the spawned
  *   meteorite objects itself are spawner objects. These are spawning the fire trails while
  *   moving downwards.
  */
 fun World.createMeteoriteSpawner() : Entity {
     return entity {
+
+        // TODO: Take Components from Korge-fleks into use
+
+        it += PositionShapeComponent(
+            x = 100.0,
+            y = -10.0  // 10 pixel above the visible area
+        )
+
+        it += SpawnerComponent(  // Config for spawned objects
+            numberOfObjects = 1,                // The spawner will generate one object per second
+            interval = 60,                      // 60 frames mean once per second
+            timeVariation = 30,                 // bring a bit of variation in the interval, so the respawning will happen every 30 to 90 frames (0.5 to 1.5 seconds)
+            positionVariation = 100.0,
+            function = configureSpawnerObject,  // Name of function which configures the spawned entity object
+            config = meteoriteObject
+        )
+//*
         it += Position(  // Position of spawner
             x = 100.0,
             y = -10.0  // 10 pixel above the visible area
         )
-        it += Spawner(  // Config for spawned objects
-            numberOfObjects = 1,  // The spawner will generate one object per second
+        it += Spawner(
+            numberOfObjects = 1,  // The spawner will generate one object per spawn trigger
             interval = 60,        // 60 frames mean once per second
             timeVariation = 30,   // bring a bit of variation in the interval, so the respawning will happen every 30 to 90 frames (0.5 to 1.5 seconds)
             // Spawner details for spawned objects (spawned objects do also spawn objects itself)
@@ -44,8 +70,13 @@ fun World.createMeteoriteSpawner() : Entity {
             // Destruct info for spawned objects
             destruct = true
         )
+// */
     }
 }
+
+
+
+
 
 /**
  *

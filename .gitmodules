@@ -1,0 +1,3 @@
+[submodule "submodules/korge-fleks"]
+	path = submodules/korge-fleks
+	url = https://github.com/korlibs/korge-fleks.git

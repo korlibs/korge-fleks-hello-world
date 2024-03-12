@@ -22,7 +22,7 @@ class SpawnerSystem : IteratingSystem(
     }
 
     private fun spawn(entity: Entity) {
-        val spawnerPosition = entity[Position]
+        val spawnerPosition = entity[Position]  // offset to position of spawner
         val spawner = entity[Spawner]
         for (i in 0 until spawner.numberOfObjects) {
             world.createMeteoriteObject(spawnerPosition, spawner)

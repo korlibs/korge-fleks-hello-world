@@ -1,5 +1,17 @@
 dependencies:
 # use upstream git repo
-  - https://github.com/korlibs/korge-fleks/tree/0acbfcb5d89eca161c3537a9160143c9a72d2725/korge-fleks
-# or use local copy
+- https://github.com/korlibs/korge-fleks/tree/9704f2275f7b58f3667cd1ab7b867908a2a1d125/korge-fleks
+# or use local copy (submodule already exists in this example)
 #- ./submodules/korge-fleks/korge-fleks
+
+# Using local copy of Korge-addon repos
+#
+# For creating submodules for all involved repositories follow below commands and create
+# needed folders. Example below is for Korge-asset-manager
+#
+#     $ git submodule add https://github.com/korlibs/korge-asset-manager.git submodules/korge-asset-manager
+#
+# Don't forget to check out commit SHA for korge-asset-manager repo from
+# "./submodules/korge-fleks/korge-fleks/kproject.yml" in that submodule:
+#
+#     $ cd submodules/korge-asset-manager && git checkout 51d4aa031202c8f53280c2b951ddec2ab0aa8ab6

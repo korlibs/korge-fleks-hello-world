@@ -6,11 +6,16 @@ import korlibs.korge.view.addUpdater
 import com.github.quillraven.fleks.*
 import korlibs.korge.assetmanager.AssetType
 import korlibs.korge.assetmanager.loadAssets
+import korlibs.korge.fleks.entity.config.FireAndDustEffect
+import korlibs.korge.fleks.entity.config.FireAndDustEffect.configureEffectObject
+import korlibs.korge.fleks.entity.config.MovedSpawnerObject
 import korlibs.korge.fleks.familyHooks.*
 import korlibs.korge.view.SContainer
 import korlibs.time.seconds
 import samples.fleks.systems.*
 import samples.fleks.entities.createMeteoriteSpawner
+import samples.fleks.entities.meteoriteDust
+import samples.fleks.entities.meteoriteObject
 
 class MainFleksSample : Scene() {
     companion object {
@@ -22,6 +27,35 @@ class MainFleksSample : Scene() {
         // Configure and load the asset objects
         loadAssets(type = AssetType.Common, folderName = "common") {
             addImage(id = "meteorite", fileName = "sprites.ase")
+
+            addEntityConfig(
+                meteoriteObject.name,
+                MovedSpawnerObject.Config(
+                    numberOfObjects = 5,
+                    interval = 1,
+                    positionVariation = 5.0,
+                    function = configureEffectObject,
+                    config = meteoriteDust,
+                    velocityX = 90.0,
+                    velocityY = 200.0,
+                    velocityVariationX = 10.0,
+                    velocityVariationY = 10.0
+                )
+            )
+            addEntityConfig(
+                meteoriteDust.name,
+                FireAndDustEffect.Config(
+                    assetName = "meteorite",
+                    animationName = "FireTrail",
+                    offsetX = 8.0,
+                    offsetY = 8.0,
+                    velocityX = -30.0,
+                    velocityY = -100.0,
+                    velocityVariationX = 15.0,
+                    velocityVariationY = 15.0,
+                    drawOnLayer = "play_field_layer_5"
+                )
+            )
         }
     }
 
