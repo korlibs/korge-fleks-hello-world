@@ -1,5 +1,5 @@
 dependencies:
 # use upstream git repo
-  - https://github.com/korlibs/korge-fleks/tree/0acbfcb5d89eca161c3537a9160143c9a72d2725/korge-fleks
+  - https://github.com/korlibs/korge-fleks/tree/d5c36fff125aea86190f902dd9110c1549047d92/korge-fleks
 # or use local copy
 #- ./submodules/korge-fleks/korge-fleks
