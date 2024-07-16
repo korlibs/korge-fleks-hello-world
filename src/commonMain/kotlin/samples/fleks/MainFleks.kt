@@ -4,57 +4,56 @@ import korlibs.korge.scene.Scene
 import korlibs.korge.view.container
 import korlibs.korge.view.addUpdater
 import com.github.quillraven.fleks.*
+import korlibs.korge.assetmanager.AssetStore
 import korlibs.korge.assetmanager.AssetType
 import korlibs.korge.assetmanager.loadAssets
 import korlibs.korge.fleks.entity.config.FireAndDustEffect
-import korlibs.korge.fleks.entity.config.FireAndDustEffect.configureEffectObject
 import korlibs.korge.fleks.entity.config.MovedSpawnerObject
-import korlibs.korge.fleks.familyHooks.*
+import korlibs.korge.fleks.tags.RenderLayerTag
 import korlibs.korge.view.SContainer
 import korlibs.time.seconds
 import samples.fleks.systems.*
 import samples.fleks.entities.createMeteoriteSpawner
-import samples.fleks.entities.meteoriteDust
-import samples.fleks.entities.meteoriteObject
 
 class MainFleksSample : Scene() {
     companion object {
         const val scaleFactor = 3
     }
 
+    private val assetStore: AssetStore = AssetStore()
+
     override suspend fun SContainer.sceneInit() {
 
         // Configure and load the asset objects
-        loadAssets(type = AssetType.Common, folderName = "common") {
+        assetStore.loadAssets(type = AssetType.Common, folderName = "common") {
             addImage(id = "meteorite", fileName = "sprites.ase")
 
-            addEntityConfig(
-                meteoriteObject.name,
-                MovedSpawnerObject.Config(
-                    numberOfObjects = 5,
-                    interval = 1,
-                    positionVariation = 5.0,
-                    function = configureEffectObject,
-                    config = meteoriteDust,
-                    velocityX = 90.0,
-                    velocityY = 200.0,
-                    velocityVariationX = 10.0,
-                    velocityVariationY = 10.0
-                )
+            MovedSpawnerObject(
+                name = "meteorite_object",
+
+
+                numberOfObjects = 5,
+                interval = 1,
+                positionVariation = 5f,
+                entityConfig = "meteorite_dust",
+
+                velocityX = 90f,
+                velocityY = 200f,
+                velocityVariationX = 10f,
+                velocityVariationY = 10f
             )
-            addEntityConfig(
-                meteoriteDust.name,
-                FireAndDustEffect.Config(
-                    assetName = "meteorite",
-                    animationName = "FireTrail",
-                    offsetX = 8.0,
-                    offsetY = 8.0,
-                    velocityX = -30.0,
-                    velocityY = -100.0,
-                    velocityVariationX = 15.0,
-                    velocityVariationY = 15.0,
-                    drawOnLayer = "play_field_layer_5"
-                )
+            FireAndDustEffect(
+                name = "meteorite_dust",
+
+                assetName = "meteorite",
+                animationName = "FireTrail",
+                offsetX = 8f,
+                offsetY = 8f,
+                velocityX = -30f,
+                velocityY = -100f,
+                velocityVariationX = 15f,
+                velocityVariationY = 15f,
+                renderLayerTag = RenderLayerTag.MAIN_EFFECTS
             )
         }
     }
@@ -76,15 +75,11 @@ class MainFleksSample : Scene() {
                 injectables {
                     add("layer0", layer0)  // Currently, we use only one layer to draw all objects to - this is also used in SpriteListener to add the image to the layer container
                     // inject("layer1", layer1)  // Add more layers when needed e.g. for explosion objects to be on top, etc.
+                    add(assetStore)
                 }
 
                 // Register family hooks which trigger actions when specific entities (combination of components) are created
                 families {
-                    // Register family hooks from Korge-fleks
-                    onAdd(drawableFamily(), onDrawableFamilyAdded)
-                    onRemove(drawableFamily(), onDrawableFamilyRemoved)
-                    onAdd(specificLayerFamily(), onSpecificLayerFamilyAdded)
-                    onRemove(specificLayerFamily(), onSpecificLayerFamilyRemoved)
                 }
 
                 // Register all needed systems of the entity component system

@@ -2,17 +2,11 @@ package samples.fleks.entities
 
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.World
-import korlibs.korge.fleks.components.PositionShapeComponent
+import korlibs.korge.fleks.components.*
 import korlibs.korge.fleks.components.SpawnerComponent
-import korlibs.korge.fleks.entity.config.MovedSpawnerObject.configureSpawnerObject
-import korlibs.korge.fleks.utils.Identifier
 import samples.fleks.components.*
 import samples.fleks.utils.random
 
-
-// Names for objects
-val meteoriteObject = Identifier(name = "meteoriteObject")
-val meteoriteDust = Identifier(name = "meteoriteDust")
 
 /**
  * This function creates a spawner entity which sits on top of the screen and
@@ -28,20 +22,20 @@ fun World.createMeteoriteSpawner() : Entity {
 
         // TODO: Take Components from Korge-fleks into use
 
-        it += PositionShapeComponent(
-            x = 100.0,
-            y = -10.0  // 10 pixel above the visible area
+        it += PositionComponent(
+            x = 100f,
+            y = -10f  // 10 pixel above the visible area
         )
 
         it += SpawnerComponent(  // Config for spawned objects
             numberOfObjects = 1,                // The spawner will generate one object per second
             interval = 60,                      // 60 frames mean once per second
             timeVariation = 30,                 // bring a bit of variation in the interval, so the respawning will happen every 30 to 90 frames (0.5 to 1.5 seconds)
-            positionVariation = 100.0,
-            function = configureSpawnerObject,  // Name of function which configures the spawned entity object
-            config = meteoriteObject
+            positionVariation = 100f,
+            entityConfig = "meteorite_object"
         )
-//*
+
+//* TODO clean up below custom components and use components from Korge-fleks
         it += Position(  // Position of spawner
             x = 100.0,
             y = -10.0  // 10 pixel above the visible area
@@ -73,10 +67,6 @@ fun World.createMeteoriteSpawner() : Entity {
 // */
     }
 }
-
-
-
-
 
 /**
  *

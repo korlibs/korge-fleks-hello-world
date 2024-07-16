@@ -27,8 +27,9 @@ data class Sprite(
     override fun World.onAdd(entity: Entity) {
         val layerContainer = inject<Container>("layer0")
 
+        val assetStore = inject<AssetStore>()
         // Set animation object
-        val asset = AssetStore.getImage(imageData)
+        val asset = assetStore.getImageData(imageData)
         imageAnimView.animation = asset.animationsByName.getOrElse(animation) { asset.defaultAnimation }
         imageAnimView.onPlayFinished = {
             // when animation finished playing trigger destruction of entity
