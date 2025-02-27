@@ -2,7 +2,7 @@ package samples.fleks.entities
 
 import com.github.quillraven.fleks.World
 import samples.fleks.components.*
-import samples.fleks.utils.random
+import korlibs.korge.fleks.utils.*
 
 fun World.createExplosionArtefact(position: Position, destruct: Destruct) {
     entity {
@@ -24,11 +24,11 @@ fun World.createExplosionArtefact(position: Position, destruct: Destruct) {
             xAcceleration = position.xAcceleration + random(destruct.explosionParticleAcceleration),
             yAcceleration = -position.yAcceleration + random(destruct.explosionParticleAcceleration)
         )
-        it += Sprite(
-            imageData = "meteorite",  // "" - Disable sprite graphic for spawned object
-            animation = "FireTrail",  // "FireTrail" - "TestNum"
-            isPlaying = true
-        )
+//        it += Sprite(
+//            imageData = "meteorite",  // "" - Disable sprite graphic for spawned object
+//            animation = "FireTrail",  // "FireTrail" - "TestNum"
+//            isPlaying = true
+//        )
         it += Rigidbody(
             mass = 2.0
         )

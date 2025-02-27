@@ -4,14 +4,14 @@ import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.World
 import korlibs.korge.fleks.components.*
 import korlibs.korge.fleks.components.SpawnerComponent
+import korlibs.korge.fleks.utils.random
 import samples.fleks.components.*
-import samples.fleks.utils.random
 
 
 /**
  * This function creates a spawner entity which sits on top of the screen and
  * spawns the meteorite objects. The config for it contains:
- * - a [PositionShapeComponent] which set the position of the spawner area 10 pixels
+ * - a [PositionComponent] which set the position of the spawner area 10 pixels
  *   above the visible area.
  * - a [SpawnerComponent] which tells the system that the spawned
  *   meteorite objects itself are spawner objects. These are spawning the fire trails while
@@ -115,13 +115,13 @@ fun World.createMeteoriteObject(position: Position, spawner: Spawner) : Entity {
         }
         // Add sprite animations
         if (spawner.spriteImageData.isNotEmpty()) {
-            it += Sprite(  // Config for spawned object
-                imageData = spawner.spriteImageData,
-                animation = spawner.spriteAnimation,
-                isPlaying = spawner.spriteIsPlaying,
-                forwardDirection = spawner.spriteForwardDirection,
-                loop = spawner.spriteLoop
-            )
+//            it += Sprite(  // Config for spawned object
+//                imageData = spawner.spriteImageData,
+//                animation = spawner.spriteAnimation,
+//                isPlaying = spawner.spriteIsPlaying,
+//                forwardDirection = spawner.spriteForwardDirection,
+//                loop = spawner.spriteLoop
+//            )
         }
         // Add destruct details
         if (spawner.destruct) {

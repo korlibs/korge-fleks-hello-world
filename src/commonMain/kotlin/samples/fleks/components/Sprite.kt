@@ -1,5 +1,5 @@
 package samples.fleks.components
-
+/*
 import com.github.quillraven.fleks.*
 import korlibs.korge.view.Container
 import korlibs.korge.view.Image
@@ -52,3 +52,4 @@ data class Sprite(
 
     companion object : ComponentType<Sprite>()
 }
+*/
