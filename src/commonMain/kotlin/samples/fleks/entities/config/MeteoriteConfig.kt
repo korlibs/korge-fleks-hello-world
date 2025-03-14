@@ -1,71 +1,95 @@
-package samples.fleks.entities
+package samples.fleks.entities.config
 
-import com.github.quillraven.fleks.Entity
-import com.github.quillraven.fleks.World
-import korlibs.korge.fleks.components.*
+
+import com.github.quillraven.fleks.*
+import korlibs.korge.fleks.components.MotionComponent
+import korlibs.korge.fleks.components.PositionComponent
 import korlibs.korge.fleks.components.SpawnerComponent
-import korlibs.korge.fleks.utils.random
-import samples.fleks.components.*
+import korlibs.korge.fleks.entity.*
+import korlibs.korge.fleks.tags.RenderLayerTag
+import korlibs.korge.fleks.tags.ScreenCoordinatesTag
+import korlibs.korge.fleks.utils.*
+import kotlinx.serialization.*
 
+@Serializable @SerialName("MeteoriteConfig")
+data class MeteoriteConfig(
+    override val name: String
+) : EntityConfig {
 
-/**
- * This function creates a spawner entity which sits on top of the screen and
- * spawns the meteorite objects. The config for it contains:
- * - a [PositionComponent] which set the position of the spawner area 10 pixels
- *   above the visible area.
- * - a [SpawnerComponent] which tells the system that the spawned
- *   meteorite objects itself are spawner objects. These are spawning the fire trails while
- *   moving downwards.
- */
-fun World.createMeteoriteSpawner() : Entity {
-    return entity {
+    override fun World.entityConfigure(entity: Entity) : Entity {
 
-        // TODO: Take Components from Korge-fleks into use
+        entity.configure {
+            // Entities -created by the SpawnerSystem- already have a position component
+            it.getOrNull(PositionComponent)?.let { position ->
+                // Add some vertical variation to the position of the spawned meteoroid objects
+                position.x += (-100..100).random()
+            }
+            it += ScreenCoordinatesTag
 
-        it += PositionComponent(
-            x = 100f,
-            y = -10f  // 10 pixel above the visible area
-        )
+            it += MotionComponent(
+                velocityX = 90f + (-10..10).random(),
+                velocityY = 200f + (-10..10).random(),
+            )
 
-        it += SpawnerComponent(  // Config for spawned objects
-            numberOfObjects = 1,                // The spawner will generate one object per second
-            interval = 60,                      // 60 frames mean once per second
-            timeVariation = 30,                 // bring a bit of variation in the interval, so the respawning will happen every 30 to 90 frames (0.5 to 1.5 seconds)
-            positionVariation = 100f,
-            entityConfig = "meteorite_object"
-        )
-
-//* TODO clean up below custom components and use components from Korge-fleks
-        it += Position(  // Position of spawner
-            x = 100.0,
-            y = -10.0  // 10 pixel above the visible area
-        )
-        it += Spawner(
-            numberOfObjects = 1,  // The spawner will generate one object per spawn trigger
-            interval = 60,        // 60 frames mean once per second
-            timeVariation = 30,   // bring a bit of variation in the interval, so the respawning will happen every 30 to 90 frames (0.5 to 1.5 seconds)
-            // Spawner details for spawned objects (spawned objects do also spawn objects itself)
-            spawnerNumberOfObjects = 5, // Enable spawning feature for spawned object
-            spawnerInterval = 1,
-            spawnerPositionVariationX = 5.0,
-            spawnerPositionVariationY = 5.0,
-            spawnerPositionAccelerationX = -30.0,
-            spawnerPositionAccelerationY = -100.0,
-            spawnerPositionAccelerationVariation = 15.0,
-            spawnerSpriteImageData = "meteorite",  // "" - Disable sprite graphic for spawned object
-            spawnerSpriteAnimation = "FireTrail",  // "FireTrail" - "TestNum"
-            spawnerSpriteIsPlaying = true,
-            // Set position details for spawned objects
-            positionVariationX = 100.0,
-            positionVariationY = 0.0,
-            positionAccelerationX = 90.0,
-            positionAccelerationY = 200.0,
-            positionAccelerationVariation = 10.0,
-            // Destruct info for spawned objects
+            it += SpawnerComponent(
+                numberOfObjects = 5,
+                interval = 1,
+                positionVariation = 5f,
+                entityConfig = "meteorite_trails"
+            )
+/*
+            // TODO: Destruct info for spawned objects
             destruct = true
-        )
-// */
+ */
+
+            //it += RenderLayerTag.DEBUG
+        }
+
+        return entity
     }
+
+    init {
+        EntityFactory.register(this)
+
+        MeteoriteTrailConfig(
+            name = "meteorite_trails"
+        )
+    }
+}
+
+
+/*
+
+
+
+
+MovedSpawnerObject(
+name = "meteorite_object",
+
+
+numberOfObjects = 5,
+interval = 1,
+positionVariation = 5f,
+entityConfig = "meteorite_dust",
+
+velocityX = 90f,
+velocityY = 200f,
+velocityVariationX = 10f,
+velocityVariationY = 10f
+)
+FireAndDustEffect(
+name = "meteorite_dust",
+
+assetName = "meteorite",
+animationName = "FireTrail",
+offsetX = 8f,
+offsetY = 8f,
+velocityX = -30f,
+velocityY = -100f,
+velocityVariationX = 15f,
+velocityVariationY = 15f,
+renderLayerTag = RenderLayerTag.MAIN_EFFECTS
+)
 }
 
 /**
@@ -133,3 +157,6 @@ fun World.createMeteoriteObject(position: Position, spawner: Spawner) : Entity {
         }
     }
 }
+
+
+ */

@@ -41,7 +41,7 @@ suspend fun main() = Korge(
     AppConfig.TARGET_VIRTUAL_WIDTH = targetVirtualWidth
 
     // Init Game state and load common assets before any scene is shown
-    GameStateManager.initGameState()
+    val gameStateConfig = GameStateManager.initGameState()
 
     // Register additional own entity configs here
     GameStateManager.register(
@@ -53,5 +53,5 @@ suspend fun main() = Korge(
             }
         }
     )
-    sceneContainer().changeTo { GameScene() }
+    sceneContainer().changeTo { GameScene(gameStateConfig) }
 }

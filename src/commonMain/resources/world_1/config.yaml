@@ -10,4 +10,5 @@ images:
     fileName: sprites.ase
 
 fonts: {}
-tileMaps: []
+
+tileMaps: {}

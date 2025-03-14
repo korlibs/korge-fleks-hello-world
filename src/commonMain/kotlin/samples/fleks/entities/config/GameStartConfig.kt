@@ -12,13 +12,18 @@ data class GameStartConfig (
 
     override fun World.entityConfigure(entity: Entity) : Entity {
 
-        entity.configure {
+        // Create meteoroid spawner entity
+        createAndConfigureEntity("meteorites_spawner")
 
-        }
+        entity.configure {}
         return entity
     }
 
     init {
         EntityFactory.register(this)
+
+        MeteoritesSpawnerConfig(
+            name = "meteorites_spawner"
+        )
     }
 }

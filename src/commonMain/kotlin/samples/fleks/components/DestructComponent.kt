@@ -9,7 +9,7 @@ import com.github.quillraven.fleks.ComponentType
  * collectable rewards, etc.)
  *
  */
-data class Destruct(
+data class DestructComponent(
     // Setting this to true triggers the DestructSystem to execute destruction of the entity
     // TODO Instead of triggering the destruction here with a property the destruction can also be triggered by adding this
     //      component to the entity which shall be destroyed. That means as long as an entity does not contain this "Destruct" component
@@ -18,10 +18,10 @@ data class Destruct(
     var triggerDestruction: Boolean = false,
     // details about what explosion animation should be spawned, etc.
     var spawnExplosion: Boolean = false,
-    var explosionParticleRange: Double = 0.0,
-    var explosionParticleAcceleration: Double = 0.0,
-) : Component<Destruct> {
-    override fun type(): ComponentType<Destruct> = Destruct
-    companion object : ComponentType<Destruct>()
+    var explosionParticleRange: Float = 0f,
+    var explosionParticleAcceleration: Float = 0f,
+) : Component<DestructComponent> {
+    override fun type(): ComponentType<DestructComponent> = DestructComponent
+    companion object : ComponentType<DestructComponent>()
 }
 

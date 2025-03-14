@@ -15,10 +15,15 @@ import korlibs.time.*
 import kotlinx.serialization.modules.*
 import samples.fleks.entities.config.GameStartConfig
 import samples.fleks.scenes.hud.inGameMenuView
+import samples.fleks.systems.CollisionSystem
 import kotlin.time.Duration.Companion.seconds
 
 
-class GameScene : Scene() {
+class GameScene(
+    // Keep game state updated (especially which start script is needed to be called)
+    private val gameStateConfig: GameStateConfig,
+    private val loadSnapshot: Boolean = false
+) : Scene() {
     private lateinit var gameWorld: World
 
     override suspend fun SContainer.sceneInit() {
@@ -28,7 +33,7 @@ class GameScene : Scene() {
         views.gameWindow.coroutineDispatcher.maxAllocatedTimeForTasksPerFrame = 10.seconds
 
         // Let game state manager decide which assets needs to be loaded
-        GameStateManager.loadAssets()
+        GameStateManager.loadAssets(gameStateConfig)
 
         // Write atlas to file for debugging
         //GameStateManager.assetStore.writeAtlasToFile()
@@ -57,6 +62,8 @@ class GameScene : Scene() {
 
                 // Tween engine system
                 setupTweenEngineSystems()
+
+                add(CollisionSystem())
 
                 // Systems below depend on changes of above tween engine systems
                 add(LifeCycleSystem())
@@ -95,7 +102,7 @@ class GameScene : Scene() {
         gameWorld.createAndConfigureEntity(entityConfig = "main_camera")
 
         // Create start script entity - this is the first entity which will be created when the game starts in GameStateManager.startGame()
-        GameStartConfig(name = "start_script")
+        GameStartConfig(name = "start_game")
 
         // Run the update of the Fleks ECS - this will periodically call all update functions of the systems
         // (e.g. onTick(), onTickEntity(), etc.)
@@ -147,6 +154,6 @@ class GameScene : Scene() {
         // DO NOT BLOCK. Called after the old scene has been destroyed and the transition has been completed.
         println("Game scene after init")
         // Trigger game state manager to start game
-        GameStateManager.startGame(gameWorld)
+        GameStateManager.run { gameWorld.startGame(gameStateConfig, loadSnapshot) }
     }
 }

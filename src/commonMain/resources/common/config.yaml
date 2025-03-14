@@ -1,9 +1,9 @@
 folder: common/assets
 hotReloading: false
 
-# sounds:
+sounds: {}
 
-# backgrounds:
+backgrounds: {}
 
 images:
   button_pause:
@@ -21,6 +21,6 @@ images:
   button_fast_rewind:
     fileName: button_fast_rewind.ase
 
-# fonts:
+fonts: {}
 
-# tileMaps:
+tileMaps: {}

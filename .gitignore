@@ -18,3 +18,4 @@ local.properties
 src/main/*
 .DS_Store
 
+/src/commonMain/resources/save_game.json
