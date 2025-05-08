@@ -1,0 +1,26 @@
+folder: common/assets
+hotReloading: false
+
+sounds: {}
+
+backgrounds: {}
+
+images:
+  button_pause:
+    fileName: button_pause.ase
+    layers: ";pause;"
+  button_play:
+    fileName: button_pause.ase
+    layers: ";play;"
+  button_forward:
+    fileName: button_forward.ase
+  button_fast_forward:
+    fileName: button_fast_forward.ase
+  button_rewind:
+    fileName: button_rewind.ase
+  button_fast_rewind:
+    fileName: button_fast_rewind.ase
+
+fonts: {}
+
+tileMaps: {}

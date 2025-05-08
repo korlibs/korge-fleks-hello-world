@@ -1,0 +1,14 @@
+folder: world_1/assets
+hotReloading: false
+
+sounds: {}
+
+backgrounds: {}
+
+images:
+  meteorite:
+    fileName: sprites.ase
+
+fonts: {}
+
+tileMaps: {}

@@ -1,5 +1,6 @@
 /.gradle
 /.idea
+/.kotlin
 /build
 /deps
 /modules
@@ -17,3 +18,4 @@ local.properties
 src/main/*
 .DS_Store
 
+/src/commonMain/resources/save_game.json

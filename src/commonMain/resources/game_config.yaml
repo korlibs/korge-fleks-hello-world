@@ -1,0 +1,7 @@
+name: "hello_world_game"
+
+firstStart: true
+world: "world_1"
+level: "level_1"
+special: ""
+startScript: "start_game"
