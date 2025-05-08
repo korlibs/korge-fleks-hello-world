@@ -7,7 +7,7 @@ import korlibs.korge.view.addTo
 import korlibs.korge.view.animation.ImageAnimationView
 import korlibs.image.bitmap.Bitmaps
 import korlibs.image.format.ImageAnimation
-import korlibs.korge.assetmanager.AssetStore
+import samples.fleks.assets.*
 
 /**
  * The sprite component adds visible details to an entity. By adding sprite to an entity the entity will be
@@ -27,9 +27,9 @@ data class Sprite(
     override fun World.onAdd(entity: Entity) {
         val layerContainer = inject<Container>("layer0")
 
-        val assetStore = inject<AssetStore>()
+        val assetStore = inject<Assets>()
         // Set animation object
-        val asset = assetStore.getImageData(imageData)
+        val asset = assetStore.getImage(imageData)
         imageAnimView.animation = asset.animationsByName.getOrElse(animation) { asset.defaultAnimation }
         imageAnimView.onPlayFinished = {
             // when animation finished playing trigger destruction of entity

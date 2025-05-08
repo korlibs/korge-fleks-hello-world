@@ -4,11 +4,8 @@ import korlibs.korge.scene.Scene
 import korlibs.korge.view.container
 import korlibs.korge.view.addUpdater
 import com.github.quillraven.fleks.*
-import korlibs.korge.assetmanager.AssetStore
-import korlibs.korge.assetmanager.AssetType
-import korlibs.korge.assetmanager.loadAssets
-import korlibs.korge.fleks.entity.config.FireAndDustEffect
-import korlibs.korge.fleks.entity.config.MovedSpawnerObject
+import korlibs.korge.fleks.assets.*
+import korlibs.korge.fleks.entity.config.*
 import korlibs.korge.fleks.tags.RenderLayerTag
 import korlibs.korge.view.SContainer
 import korlibs.time.seconds
@@ -25,7 +22,7 @@ class MainFleksSample : Scene() {
     override suspend fun SContainer.sceneInit() {
 
         // Configure and load the asset objects
-        assetStore.loadAssets(type = AssetType.Common, folderName = "common") {
+        assetStore.loadAssets(type = AssetType.COMMON, assetConfig = AssetModel("common")) {
             addImage(id = "meteorite", fileName = "sprites.ase")
 
             MovedSpawnerObject(
